@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                <a href="/">Home</a>
+                <p> | </p>
+                <a href="/register">Register</a>
+            </div>
+        </div>
+        <form action="/process_login" method="post" id="main">
+            <h2>Log In:</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row">
+                <label for="email">Email:</label>
+                <input type="text" name="email">
+            </div>
+            <div class="row">
+                <label for="password">Password:</label>
+                <input type="text" name="password">
+            </div>
+            <div id="rightbtn">
+                <button>Log In</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                {% if session['bool']: %}
+                    <p>Welcome {{user.user_name}}!</p>
+                    <p> | </p>
+                    <a href="/yourcars/{{user.id}}">YourCars</a>
+                    <p> | </p>
+                    <a href="/messages/{{user.id}}">Messages</a>
+                    <p> | </p>
+                    <a href="/account/{{user.id}}">Account</a>
+                    <p> | </p>
+                    <a href="/logout">Logout</a>
+                {% else: %}
+                    <a href="/login">Log In</a>
+                    <p> | </p>
+                    <a href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="main">
+            <h2>Cars for Sale:</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% for car in cars %}
+                {% if car.listed == 1 %}
+                    <div class="row">
+                        <img src="{{ url_for('static', filename='images/'+car.image+'') }}" alt="{{car.year}} {{car.make}} {{car.model}}">
+                        <a href="/view/{{car.id}}"><i>{{car.year}} {{car.make}} {{car.model}}</i></a>
+                        <p>Price: ${{car.price}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

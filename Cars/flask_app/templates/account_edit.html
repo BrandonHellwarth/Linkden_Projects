@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/account_edit.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                <a href="/">Home</a>
+                <p> | </p>
+                <a href="/yourcars/{{user.id}}">YourCars</a>
+                <p> | </p>
+                <a href="/messages/{{user.id}}">Messages</a>
+                <p> | </p>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <div id="main">
+            <h2>Edit Account:</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/process_account_edit/{{user.id}}" method="post" id="main1">
+                <div id="left">
+                    <div class="row">
+                        <label for="username">User Name:</label>
+                        <input type="text" name="username" value="{{user.user_name}}">
+                    </div>
+                    <div class="row">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" value="{{user.email}}">
+                    </div>
+                    <div class="row">
+                        <label for="password">Password:</label>
+                        <input type="text" name="password">
+                    </div>
+                    <div class="row">
+                        <label for="password_confirm">Confirm Password:</label>
+                        <input type="text" name="password_confirm">
+                    </div>
+                </div>
+                <div id="right">
+                    <div class="row">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" name="phone" value="{{user.phone}}">
+                    </div>
+                    <div class="row">
+                        <label for="city">City:</label>
+                        <input type="text" name="city" value="{{user.city}}">
+                    </div>
+                    <div class="row">
+                        <label for="state">State:</label>
+                        <select name="state" value="{{user.state}}">
+                            {% for state in states %}
+                                {% if state == user.state %}
+                                    <option value="{{state}}" selected>{{state}}</option>
+                                {% else %}
+                                    <option value="{{state}}">{{state}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label for="zip_code">Zip Code:</label>
+                        <input type="text" name="zip_code" value="{{user.zip_code}}">
+                    </div>
+                </div>
+            </form>
+            <div id="rightbtn">
+                <button>Update Info</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

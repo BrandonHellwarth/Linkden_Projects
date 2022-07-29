@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit A Car</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/add.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                <a href="/">Home</a>
+                <p> | </p>
+                <a href="/yourcars/{{user.id}}">YourCars</a>
+                <p> | </p>
+                <a href="/messages/{{user.id}}">Messages</a>
+                <p> | </p>
+                <a href="/account/{{user.id}}">Account</a>
+                <p> | </p>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        
+        <form action="/process_edit_car/{{user.id}}/{{car.id}}" method = "post" enctype="multipart/form-data" id="main">
+            <h2>Edit a Car:</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row">
+                <input type="hidden" value="{{car.image}}" name="old_photo">
+                <label for="image">Upload Image:</label>
+                <input type="file" name="image" value="{{car.image}}" id="file">
+            </div>
+            <div class="row">
+                <label for="year">Year:</label>
+                <input type="number" name="year" min="1900" max="2023" value="{{car.year}}">
+            </div>
+            <div class="row">
+                <label for="make">Make:</label>
+                <input type="text" name="make" value="{{car.make}}">
+            </div>
+            <div class="row">
+                <label for="model">Model:</label>
+                <input type="text" name="model" value="{{car.model}}">
+            </div>
+            <div class="row">
+                <label for="description">Description:</label>
+                <textarea name="description" cols="30" rows="10" id="content">{{car.description}}</textarea>
+            </div>
+            <div class="row">
+                <label for="price">Price:</label>
+                <input type="text" name="price" value="{{car.price}}">
+            </div>
+            <div id="rightbtn">
+                <button>Edit Car!</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

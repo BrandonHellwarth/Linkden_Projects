@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{car.year}} {{car.make}} {{car.model}}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/view.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                {% if session['bool']: %}
+                    <a href="/">Home</a>
+                    <p> | </p>
+                    <a href="/yourcars/{{user.id}}">YourCars</a>
+                    <p> | </p>
+                    <a href="/messages/{{user.id}}">Messages</a>
+                    <p> | </p>
+                    <a href="/account/{{user.id}}">Account</a>
+                    <p> | </p>
+                    <a href="/logout">Logout</a>
+                {% else: %}
+                    <a href="/">Home</a>
+                    <p> | </p>
+                    <a href="/login">Log In</a>
+                    <p> | </p>
+                    <a href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="main">
+            <h2>{{car.year}} {{car.make}} {{car.model}}</h2>
+            <div id="main1">
+                <div id="left">
+                    <img src="{{ url_for('static', filename='images/'+car.image+'') }}" height="600px" alt="{{car.make}} {{car.model}}">
+                    {% if session['bool'] and session['user']['id'] == car.user_id:%}
+                    {% else %}
+                    <div>
+                        <a href="/view_user/{{car.user_id}}">Contact Seller</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div id="right">
+                    <p>Description:</p>
+                    <p>{{car.description}}</p>
+                    <p>Price: ${{car.price}}</p>
+                    <p>Seller: {{car.user_name}}</p>
+                    <p>Location:</p>
+                    <p>{{car.city}} {{car.state}}, {{car.zip_code}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

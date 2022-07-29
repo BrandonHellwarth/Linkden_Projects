@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCars</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/yourcars.css')}}">
+</head>
+<body>
+    <div id="border">
+        <div id="nav">
+            <h1>CarSalesWebsite</h1>
+            <div id="links">
+                <a href="/">Home</a>
+                <p> | </p>
+                <a href="/messages/{{user.id}}">Messages</a>
+                <p> | </p>
+                <a href="/account/{{user.id}}">Account</a>
+                <p> | </p>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <div id="main">
+            <h2> Your Cars for Sale:</h2>
+            <div id="main1">
+                {% for car in user.cars: %}
+                    {% if car.listed == 1 %}
+                        <div class="row">
+                            <img src="{{ url_for('static', filename='images/'+car.image+'') }}" height="100px" alt="{{car.make}} {{car.model}}">
+                            <p>{{car.year}} {{car.make}} {{car.model}}</p>
+                            <p>Price: ${{car.price}}</p>
+                            <a href="/remove/{{user.id}}/{{car.id}}"><i>Remove Listing</i></a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div id="nav2">
+                <h2>Saved Drafts:</h2>
+                <a href="/add_a_car/{{user.id}}"><i>Add a Car!</i></a>
+            </div>
+            <div id="main2">
+                {% for car in user.cars: %}
+                <div class="row">
+                    <img src="{{ url_for('static', filename='images/'+car.image+'') }}" height="100px" alt="{{car.make}} {{car.model}}">
+                    <p>{{car.year}} {{car.make}} {{car.model}}</p>
+                    <p>Price: ${{car.price}}</p>
+                    <div id="links2">
+                        <a href="/list/{{user.id}}/{{car.id}}"><i>List Car</i></a>
+                        <p> | </p>
+                        <a href="/edit/{{user.id}}/{{car.id}}"><i>Edit Car</i></a>
+                        <p> | </p>
+                        <a href="/delete/{{user.id}}/{{car.id}}"><i>Delete</i></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
