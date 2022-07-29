@@ -36,8 +36,7 @@ class User:
     @classmethod
     def get_one(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        user = connectToMySQL('carz').query_db(query, data)
-        return user
+        return connectToMySQL('carz').query_db(query, data)
     @classmethod
     def get_one_by_email(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"

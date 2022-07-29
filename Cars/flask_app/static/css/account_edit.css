@@ -73,3 +73,7 @@ body{
 #rightbtn{
     text-align: right;
 }
+#flash{
+    color: red;
+    font-size: 1.5rem;
+}

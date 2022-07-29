@@ -1,3 +1,5 @@
+from __future__ import print_function # In python 2.7
+import sys
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user import User
@@ -109,7 +111,10 @@ def yourcars(id):
         data = {
             'id' : id
         }
-        return render_template('yourcars.html', user = User.get_user_with_cars(data))
+        if getattr(User.get_user_with_cars(data).cars[0], "id") is None:
+            return render_template('yourcars.html', user = User.get_one(data)[0])
+        else:
+            return render_template('yourcars.html', user = User.get_user_with_cars(data))
     else:
         flash("No user logged in")
         return redirect('/')

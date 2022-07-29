@@ -73,3 +73,7 @@ h2{
     padding: 5px 10px;
     border-radius: 10px;
 }
+#flash{
+    color: red;
+    font-size: 1.5rem;
+}

@@ -64,3 +64,9 @@ body{
     padding: 5px 10px;
     border-radius: 10px;
 }
+#flash{
+    text-align: center;
+    color: red;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}

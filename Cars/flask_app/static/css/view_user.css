@@ -66,3 +66,7 @@ body{
     border: 2px solid black;
     font-size: 1.25rem;
 }
+#flash{
+    color: red;
+    font-size: 1.5rem;
+}
