@@ -15,6 +15,10 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def clever_function(data):
+    return reversed(data)
+app.jinja_env.globals.update(clever_function=clever_function)
+
 @app.route('/')
 def home():
     key = "bool"
@@ -296,6 +300,14 @@ def messages(id):
 @app.route('/reply/<int:id>', methods=["POST"])
 def reply(id):
     return redirect('/view_user/' + str(id))
+
+@app.route('/delete_message/<int:id>/<int:mid>', methods=["POST"])
+def delete_message(id, mid):
+    data = {
+        'mid' : mid
+    }
+    Message.delete(data)
+    return redirect('/messages/' + str(id))
 
 @app.route('/account/<int:id>')
 def account(id):

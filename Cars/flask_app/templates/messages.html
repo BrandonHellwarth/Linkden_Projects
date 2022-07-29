@@ -24,7 +24,7 @@
         <div id="main">
             <h2>Sent Messages:</h2>
             <div class="box">
-                {% for recipient in recipients %}
+                {% for recipient in clever_function(recipients) %}
                     {% if recipient.user_id == user.id %}
                     <div class="row">
                         <p>Too: {{recipient.user_name}}</p>
@@ -36,13 +36,18 @@
             </div>
             <h2>Inbox:</h2>
             <div class="box">
-                {% for message in messages %}
+                {% for message in clever_function(messages) %}
                     <div class="row">
                         <p>From: {{message.user_name}}</p>
                         <p>Date: {{message['messages.created_at']}}</p>
-                        <form action="/reply/{{message.user_id}}" method="post" id="btn">
-                            <button>Reply</button>
-                        </form>
+                        <div id="btns">
+                            <form action="/reply/{{message.user_id}}" method="post" id="btn">
+                                <button>Reply</button>
+                            </form>
+                            <form action="/delete_message/{{user.id}}/{{message['messages.id']}}" method="post" id="btn">
+                                <button>Delete</button>
+                            </form>
+                        </div>
                     </div>
                     <p id="content"><span class="span">Content:</span> {{message.content}}</p>
                 {% endfor %}

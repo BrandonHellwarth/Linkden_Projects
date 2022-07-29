@@ -16,3 +16,7 @@ class Message:
     def get_user_messages(cls, data):
         query = "SELECT * FROM messages WHERE recipient_id = %(id)s"
         return connectToMySQL('carz').query_db( query, data )
+    @classmethod
+    def delete(cls, data):
+        query = "DELETE FROM messages WHERE id = %(mid)s;"
+        return connectToMySQL('carz').query_db( query, data )

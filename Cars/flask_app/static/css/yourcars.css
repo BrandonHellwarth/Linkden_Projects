@@ -43,10 +43,14 @@ body{
     padding: 30px;
     border: 4px solid black;
     margin-bottom: 30px;
+    overflow-y: auto;
+    height: 450px;
 }
 #main2{
     padding: 30px;
     border: 4px solid black;
+    overflow-y: auto;
+    height: 450px;
 }
 #nav2{
     color: black;
