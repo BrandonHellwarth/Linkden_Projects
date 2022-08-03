@@ -1,5 +1,3 @@
-from __future__ import print_function # In python 2.7
-import sys
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.user import User
@@ -359,7 +357,6 @@ def process_account_edit(id):
     }
     all_users = User.get_all()
     user1 = User.get_one(data)[0]
-    print(user1, file=sys.stderr)
     for user in all_users:
         if data['email'] == user.email:
             if data['email'] != user1['email']:
