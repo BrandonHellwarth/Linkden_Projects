@@ -18,7 +18,7 @@ def allowed_file(filename):
 def clever_function(data):
     return reversed(data)
 app.jinja_env.globals.update(clever_function=clever_function)
-# commit test
+
 @app.route('/')
 def home():
     key = "bool"
