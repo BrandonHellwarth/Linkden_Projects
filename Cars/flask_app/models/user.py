@@ -1,5 +1,3 @@
-from __future__ import print_function # In python 2.7
-import sys
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.car import Car
 from flask_app.models.message import Message
