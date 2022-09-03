@@ -7,20 +7,25 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add a Category</title>
+<link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 <body>
 	<div id="header">
 		<h1>RetroGames</h1>
-		<a href="/dashboard/${ admin.id }">Home</a>
-		<a href="/logoutAdmin">logout</a>
+		<div id="head">
+			<a href="/dashboard/${ admin.id }">Home</a>
+			<a href="/logoutAdmin">logout</a>
+		</div>
 	</div>
-	<h2>Add a Category</h2>
-	<form:form action="/processAddCategory/${ admin.id }" method="post" modelAttribute="category">
-		<form:label path="name">Name:</form:label>
-		<form:input path="name"></form:input>
-		<form:errors path="name"></form:errors>
+	<form:form action="/processAddCategory/${ admin.id }" method="post" modelAttribute="category" id="main">
+		<h2>Add a Category</h2>
+		<div class="row">
+			<form:label path="name">Name:</form:label>
+			<form:input path="name" id="input"></form:input>
+			<form:errors path="name"></form:errors>
+		</div>
 		
-		<input type="submit" value="Add Category"/>
+		<input type="submit" value="Add Category" id="btn"/>
 	</form:form>
 </body>
 </html>
