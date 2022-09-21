@@ -10,5 +10,5 @@ import com.BrandonHellwarth.RetroGames.Models.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
 	Optional<User> findByEmail(String email);
-	Optional<User> findByUserNameContains(String UserName);
+	Optional<User> findByUserName(String UserName);
 }

@@ -25,7 +25,7 @@ public class UserService {
 	public User register(User newUser, BindingResult result) {
 		
 		Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
-		Optional<User> potentialUser2 = userRepo.findByUserNameContains(newUser.getUserName());
+		Optional<User> potentialUser2 = userRepo.findByUserName(newUser.getUserName());
 		
 		if(!newUser.getPassword().equals(newUser.getConfirm())) {
 		    result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
@@ -68,6 +68,10 @@ public class UserService {
     public User updateUser(Long id, String userName, String email, String password, String confirm, BindingResult result) {
 		Optional<User> optionalUser = userRepo.findById(id);
 		if(optionalUser.isPresent()) {
+			if(password == "") { //validations won't work without this statement, not sure why.
+				result.rejectValue("password", "Matches", "");
+				return null;
+			}
 			if(!password.equals(confirm)) {
 				result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
 				return null;
